@@ -5,3 +5,8 @@
 	flex-wrap: wrap;
 	margin-top: 100px;
 }
+
+h1 {
+	font-size: 330%;
+	margin-bottom: 10px;
+}

@@ -5,15 +5,17 @@ import Button from './Button'
 import '../style/GameBoard.css';
 
 function GameBoard(props) {
+	const { player, gameOver, restartGame, boardContent, handleClick } = props;
+	let status;
+
 	function renderButton(i) {
 		return <Button 
-						value={props.boardContent[i]}
-						handleClick={() => props.handleClick(i)}
+						value={boardContent[i]}
+						handleClick={() => handleClick(i)}
+						player={player}
+						gameOver={gameOver}
 					 />
 	}
-
-	const { player, gameOver, restartGame } = props;
-	let status;
 
 	if (gameOver === 'win') {
 		status = `Game over. Winner is ${player === 'X' ? 'O':'X'}`;
@@ -26,7 +28,7 @@ function GameBoard(props) {
 	return(
 		<div className="game-board">
 			<div className="status">{status}</div>
-			<div className="row row-1">
+			<div className="row">
 				{renderButton(0)}
 				{renderButton(1)}
 				{renderButton(2)}					
@@ -36,14 +38,12 @@ function GameBoard(props) {
 				{renderButton(4)}
 				{renderButton(5)}		
 			</div>
-			<div className="row row-3">
+			<div className="row">
 				{renderButton(6)}
 				{renderButton(7)}
 				{renderButton(8)}		
 			</div>
-			{ gameOver &&
-				<button onClick={restartGame}>Restart</button>
-			}
+			<button className="restart" onClick={restartGame}>Restart</button>
 		</div>
 	);
 }
